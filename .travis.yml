@@ -13,4 +13,13 @@ after_success:
  - docker build -t hereisvishal/multi-server ./server
  - docker build -t hereisvishal/multi-nginx ./nginx
  - docker build -t hereisvishal/multi-worker ./worker
+ #Login to DockerHub using credentials stored in Travis CI
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#Taking built images to DockerHub
+- docker push hereisvishal/multi-client
+- docker push hereisvishal/multi-worker
+- docker push hereisvishal/multi-server
+- docker push hereisvishal/multi-nginx
+
+
  
